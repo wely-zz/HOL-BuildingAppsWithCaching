@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Lab xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.datacontract.org/2004/07/ContentFramework.Core.Models">
+  <Id>BuildingAppsWithCacheService</Id>
+  <Technologies>
+    <Technology>Windows Azure Caching</Technology>
+  </Technologies>
+  <Author>
+    <Blog>
+    </Blog>
+    <Email>
+    </Email>
+    <Name>wwegner</Name>
+  </Author>
+  <Description>In this lab, learn how to use the Windows Azure Caching service for both your ASP.NET session state and to cache data from your data-tier.  You will see how the Caching service provides your application with a cache that provides low latency and high throughput without having to configure, deploy, or manage the service.</Description>  
+  <Document ConversionType="Html">.\HOL.md</Document>  
+  <Title>Building Windows Azure Applications with the Caching Service</Title>
+  <Version>2.0.0</Version>
+  <Source>.\Source</Source>
+  <DependencyChecker>.\source\Setup\Dependencies.depi</DependencyChecker>
+  <CustomProperties>
+	<Property Name="GitHubRepository" Value="https://github.com/WindowsAzure-TrainingKit/HOL-BuildingAppsCachingService" />
+  </CustomProperties>  
+</Lab>

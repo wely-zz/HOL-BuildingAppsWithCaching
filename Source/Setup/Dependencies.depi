@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<DependencyCheckerConfiguration version="2.0">
+	<title>Building Windows Azure Apps with Caching Service</title>
+	<dependencies>
+		<dependency 
+			hint="WindowsAzureToolsVS2010" 
+			name="Windows Azure Tools for Microsoft Visual Studio 2010 v1.6" 
+			helpLink="http://go.microsoft.com/fwlink/?LinkID=128752" 
+			disableSkip="false"
+			type="WebPI" />
+		<dependency
+			hint="WindowsAzureLibrariesNET"
+			name="Windows Azure Libraries for .NET 1.6"
+			helpLink="http://www.microsoft.com/web/gallery/install.aspx?appid=WindowsAzureLibrariesNET"
+			type="WebPI" />
+    </dependencies>
+  <setupCommands>
+    <setup 
+		command="setup.cmd" 
+		name="Setup Script" 
+		description="Executing setup scripts..." />
+  </setupCommands>	
+</DependencyCheckerConfiguration>
