@@ -12,9 +12,20 @@
             List<string> products = null;
 
             NorthwindEntities context = new NorthwindEntities();
-            var query = from product in context.Products
-                        select product.ProductName;
-            products = query.ToList();
+
+            try
+            {
+                var query = from product in context.Products
+                            select product.ProductName;
+                products = query.ToList();
+            }
+            finally
+            {
+                if (context != null)
+                {
+                    context.Dispose();
+                }
+            }
 
             return products;
         }

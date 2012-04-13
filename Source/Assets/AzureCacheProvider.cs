@@ -10,7 +10,7 @@
     {
         private readonly DataCacheFactory cacheFactory;
 
-        private const string regionKeyTemplate = "{0}:{1}";
+        private const string RegionKeyTemplate = "{0}:{1}";
 
         public AzureCacheProvider()
         {
@@ -66,7 +66,7 @@
         {
             try
             {
-                return cacheFactory.GetDefaultCache().Get(GetKey(key, regionName));
+                return this.cacheFactory.GetDefaultCache().Get(GetKey(key, regionName));
             }
             catch (DataCacheException ex)
             {
@@ -90,7 +90,7 @@
             var data = this.Get(key, regionName);
             if (data != null)
             {
-                return new CacheItem(key, data, regionName); ;
+                return new CacheItem(key, data, regionName);
             }
 
             return null;
@@ -120,7 +120,10 @@
 
         public override void Set(CacheItem item, CacheItemPolicy policy)
         {
-            if (item.Value == null) return;
+            if (item.Value == null)
+            {
+                return;
+            }
 
             try
             {
@@ -153,17 +156,17 @@
             throw new NotSupportedException();
         }
 
-        protected override IEnumerator<System.Collections.Generic.KeyValuePair<string, object>> GetEnumerator()
-        {
-            throw new NotSupportedException();
-        }
-
         public override IDictionary<string, object> GetValues(System.Collections.Generic.IEnumerable<string> keys, string regionName = null)
         {
             throw new NotSupportedException();
         }
 
         public override CacheEntryChangeMonitor CreateCacheEntryChangeMonitor(System.Collections.Generic.IEnumerable<string> keys, string regionName = null)
+        {
+            throw new NotSupportedException();
+        }
+
+        protected override IEnumerator<System.Collections.Generic.KeyValuePair<string, object>> GetEnumerator()
         {
             throw new NotSupportedException();
         }
@@ -176,7 +179,7 @@
             }
             else
             {
-                return string.Format(CultureInfo.InvariantCulture, regionKeyTemplate, key, regionName);
+                return string.Format(CultureInfo.InvariantCulture, RegionKeyTemplate, key, regionName);
             }
         }
     }

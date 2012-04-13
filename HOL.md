@@ -343,12 +343,12 @@ In this task, you update the data access code to cache the result of queries to 
 
 1. In the **ProductsRepository** class, add the following highlighted code to define a constructor and declare a static member variable for a **DataCacheFactory** object instance, in addition to a boolean instance variable to control the use of the cache.
 
-	(Code Snippet - _BuildingAppsWithCachingService-Ex2- ProductsRepository constructor-CS_)
+	(Code Snippet - _BuildingAppsWithCachingService-Ex2-ProductsRepository constructor-CS_)
 	<!--mark: 3-9-->
 	````C#
 	public class ProductsRepository : IProductRepository	
 	{
-	  private static DataCacheFactory CacheFactory = new DataCacheFactory();
+	  private static DataCacheFactory cacheFactory = new DataCacheFactory();
 	  private bool enableCache = false;
  
 	  public ProductsRepository(bool enableCache)
@@ -367,8 +367,8 @@ In this task, you update the data access code to cache the result of queries to 
 
 1. Locate the **GetProducts** method and insert the following (highlighted) code immediately after the line that declares the **products** local variable.
 	
-	(Code Snippet - _BuildingAppsWithCachingService-Ex2- GetProducts read cache-CS_)
-	<!--mark: 8-29-->
+	(Code Snippet - _BuildingAppsWithCachingService-Ex2-GetProducts read cache-CS_)
+	<!--mark: 8-30-->
 	````C#
 	public class ProductsRepository : IProductRepository
 	{
@@ -378,11 +378,11 @@ In this task, you update the data access code to cache the result of queries to 
 	    List<string> products = null;
 	
 	    DataCache dataCache = null;
-	    if (enableCache)
+	    if (this.enableCache)
 	    {
 	      try
 	      {
-	        dataCache = CacheFactory.GetDefaultCache();
+	        dataCache = cacheFactory.GetDefaultCache();
 	        products = dataCache.Get("products") as List<string>;
 	        if (products != null)
 	        {
@@ -396,26 +396,38 @@ In this task, you update the data access code to cache the result of queries to 
 	        {
 	          throw;
 	        }
+
 	        // ignore temporary failures
 	      }
 	    }
- 
+ 	    
 	    NorthwindEntities context = new NorthwindEntities();
-	    var query = from product in context.Products
-	                select product.ProductName;
-	    products = query.ToList();
-	
+	    
+	    try
+	    {
+	      var query = from product in context.Products
+	                  select product.ProductName;
+	      products = query.ToList();
+	    }
+	    finally
+	    {
+	      if (context != null)
+	      {
+	        context.Dispose();
+	      }
+	    }
+	    
 	    return products;
 	  }
-}
+	}
 	````
 
 	>**Note:** The inserted code uses the **DataCacheFactory** object to return an instance of the default cache object and then attempts to retrieve an item from this cache using a key with the value "_products_". If the cache contains an object with the requested key, it sets the text of the first entry to indicate that the list was retrieved from the cache and then returns it. The code treats temporary failures from the Windows Azure Caching service as a cache miss so that it can retrieve the item from its data source instead.
 
 1. Next, add the following (highlighted) code block to the **GetProducts** method, immediately before the line that returns the **products** list at the end of the method.
 
-	(Code Snippet - _BuildingAppsWithCachingService-Ex2- GetProducts write cache-CS_)
-	<!--mark: 19-24-->
+	(Code Snippet - _BuildingAppsWithCachingService-Ex2-GetProducts write cache-CS_)
+	<!--mark: 30-35-->
 	````C#
 	public class ProductsRepository : IProductRepository
 	{
@@ -425,24 +437,35 @@ In this task, you update the data access code to cache the result of queries to 
 			List<string> products = null;
 		
 			DataCache dataCache = null;
-			if (enableCache)
+			if (this.enableCache)
 			{
 			  ...
 			}
 		
 			NorthwindEntities context = new NorthwindEntities();
-			var query = from product in context.Products
-						select product.ProductName;
-			products = query.ToList();
+		
+			try
+			{
+			  var query = from product in context.Products
+			             select product.ProductName;
+			  products = query.ToList();
+			}
+			finally
+			{
+			  if (context != null)
+			  {
+			    context.Dispose();
+			  }
+			}
 		
 			products.Insert(0, "(from data source)");
 		
-			if (enableCache && dataCache != null)
+			if (this.enableCache && dataCache != null)
 			{
 			  dataCache.Add("products", products, TimeSpan.FromSeconds(30));
 			}
 			
-			return products;s
+			return products;
 		}
 	}
 	````
@@ -456,7 +479,7 @@ In this task, you will update the application to allow control of the use of the
 
 1. Open the **HomeController.cs** file in the **Controllers** folder and find the **Index** action. Locate the lines that instantiate a new **ProductsRepository** and call its **GetProducts** method, and replace them with the highlighted code, as shown below.
 
-	(Code Snippet - _BuildingAppsWithCachingService-Ex2- GetProducts latency-CS_)
+	(Code Snippet - _BuildingAppsWithCachingService-Ex2-GetProducts latency-CS_)
 	<!--mark: 9-17; strike:6-8-->
 	````C#
 	public class HomeController : Controller
@@ -584,12 +607,12 @@ When using the Windows Azure Caching service, you have the option of using a loc
 
 1. In the **ProductsRepository** class, replace the current fields and constructor with the following code, to add the logic of managing the localCache configuration.
 
-	(Code Snippet - _BuildingAppsWithCachingService-Ex2- ProductsRepository with local cache-CS_)
+	(Code Snippet - _BuildingAppsWithCachingService-Ex2-ProductsRepository with local cache-CS_)
 	<!--mark: 2-34-->
 	````C#
 	...	
-	private static DataCacheFactory CacheFactory;
-	private static DataCacheFactoryConfiguration FactoryConfig;
+	private static DataCacheFactory cacheFactory;
+	private static DataCacheFactoryConfiguration factoryConfig;
 	private bool enableCache = false;
 	private bool enableLocalCache = false;
 	
@@ -600,25 +623,25 @@ When using the Windows Azure Caching service, you have the option of using a loc
 	
 	    if (enableCache)
 	    {
-	        if (enableLocalCache && (FactoryConfig == null || !FactoryConfig.LocalCacheProperties.IsEnabled))
+	        if (enableLocalCache && (factoryConfig == null || !factoryConfig.LocalCacheProperties.IsEnabled))
 	        {
 	            TimeSpan localTimeout = new TimeSpan(0, 0, 30);
 	            DataCacheLocalCacheProperties localCacheConfig = new DataCacheLocalCacheProperties(10000, localTimeout, DataCacheLocalCacheInvalidationPolicy.TimeoutBased);
-	            FactoryConfig = new DataCacheFactoryConfiguration();
+	            factoryConfig = new DataCacheFactoryConfiguration();
 	
-	            FactoryConfig.LocalCacheProperties = localCacheConfig;
-	            CacheFactory = new DataCacheFactory(FactoryConfig);
+	            factoryConfig.LocalCacheProperties = localCacheConfig;
+	            cacheFactory = new DataCacheFactory(factoryConfig);
 	        }
-	        else if (!enableLocalCache && (FactoryConfig == null || FactoryConfig.LocalCacheProperties.IsEnabled))
+	        else if (!enableLocalCache && (factoryConfig == null || factoryConfig.LocalCacheProperties.IsEnabled))
 	        {
-	            CacheFactory = null;
+	            cacheFactory = null;
 	        }
 	    }
 	
-	    if (CacheFactory == null)
+	    if (cacheFactory == null)
 	    {
-	        FactoryConfig = new DataCacheFactoryConfiguration();
-	        CacheFactory = new DataCacheFactory(FactoryConfig);
+	        factoryConfig = new DataCacheFactoryConfiguration();
+	        cacheFactory = new DataCacheFactory(factoryConfig);
 	    }
 	} 
 	...
@@ -626,7 +649,7 @@ When using the Windows Azure Caching service, you have the option of using a loc
 
 1. Open the **HomeController.cs** file in the **Controllers** folder and find the **Index** action. Locate the line that instantiates a new **ProductsRepository** and Replace those lines with the following highlighted code:
 
-	(Code Snippet - _BuildingAppsWithCachingService-Ex2- GetProducts LocalCache-CS_)
+	(Code Snippet - _BuildingAppsWithCachingService-Ex2-GetProducts LocalCache-CS_)
 	<!--mark: 7-10; strike: 11-13-->
 	````C#
 	public class HomeController : Controller
@@ -678,7 +701,7 @@ When using the Windows Azure Caching service, you have the option of using a loc
 	          ElapsedTime = stopWatch.ElapsedMilliseconds,
 	          IsCacheEnabled = enableCache,
 	          IsLocalCacheEnabled = enableLocalCache,
-           ObjectId = products.GetHashCode().ToString()
+	          ObjectId = products.GetHashCode().ToString()
 	      };
 	      return View(model);
 	  }
@@ -942,8 +965,8 @@ Once you have created an abstract base class for caching data sources, you will 
 
 1. Add the following code to define a constructor and declare a member field that holds a reference to the underlying data source, as shown (highlighted) below.
 
-	Code Snippet - _BuildingAppsWithCachingService-Ex3-CachedProductsRepository constructor-CS_)
-	<!--mark: 3-10-->
+	(Code Snippet - _BuildingAppsWithCachingService-Ex3-CachedProductsRepository constructor-CS_)
+	<!--mark: 3-9-->
 	````C#
 	public class CachedProductsRepository : CachedDataSource, IProductRepository
 	{
@@ -1039,7 +1062,7 @@ In this task, you will create a factory class that can return data source instan
 
 1. Next, add the following property to return the configured cache service provider.
 
-	(Code Snippet - _BuildingAppsWithCachingService-Ex3- CacheProvider property-CS_)
+	(Code Snippet - _BuildingAppsWithCachingService-Ex3-CacheProvider property-CS_)
 	<!--mark: 4-7-->
 	````C#
 	public class DataSourceFactory

@@ -8,8 +8,8 @@
 
     public class ProductsRepository : IProductRepository
     {
-        private static DataCacheFactory CacheFactory;
-        private static DataCacheFactoryConfiguration FactoryConfig;
+        private static DataCacheFactory cacheFactory;
+        private static DataCacheFactoryConfiguration factoryConfig;
         private bool enableCache = false;
         private bool enableLocalCache = false;
 
@@ -20,39 +20,38 @@
 
             if (enableCache)
             {
-                if (enableLocalCache && (FactoryConfig == null || !FactoryConfig.LocalCacheProperties.IsEnabled))
+                if (enableLocalCache && (factoryConfig == null || !factoryConfig.LocalCacheProperties.IsEnabled))
                 {
                     TimeSpan localTimeout = new TimeSpan(0, 0, 30);
                     DataCacheLocalCacheProperties localCacheConfig = new DataCacheLocalCacheProperties(10000, localTimeout, DataCacheLocalCacheInvalidationPolicy.TimeoutBased);
-                    FactoryConfig = new DataCacheFactoryConfiguration();
+                    factoryConfig = new DataCacheFactoryConfiguration();
 
-                    FactoryConfig.LocalCacheProperties = localCacheConfig;
-                    CacheFactory = new DataCacheFactory(FactoryConfig);
+                    factoryConfig.LocalCacheProperties = localCacheConfig;
+                    cacheFactory = new DataCacheFactory(factoryConfig);
                 }
-                else if (!enableLocalCache && (FactoryConfig == null || FactoryConfig.LocalCacheProperties.IsEnabled))
+                else if (!enableLocalCache && (factoryConfig == null || factoryConfig.LocalCacheProperties.IsEnabled))
                 {
-                    CacheFactory = null;
+                    cacheFactory = null;
                 }
             }
 
-            if (CacheFactory == null)
+            if (cacheFactory == null)
             {
-                FactoryConfig = new DataCacheFactoryConfiguration();
-                CacheFactory = new DataCacheFactory(FactoryConfig);
+                factoryConfig = new DataCacheFactoryConfiguration();
+                cacheFactory = new DataCacheFactory(factoryConfig);
             }
         }
-
 
         public List<string> GetProducts()
         {
             List<string> products = null;
 
             DataCache dataCache = null;
-            if (enableCache)
+            if (this.enableCache)
             {
                 try
                 {
-                    dataCache = CacheFactory.GetDefaultCache();
+                    dataCache = cacheFactory.GetDefaultCache();
                     products = dataCache.Get("products") as List<string>;
                     if (products != null)
                     {
@@ -66,17 +65,30 @@
                     {
                         throw;
                     }
+
                     // ignore temporary failures
                 }
             }
 
             NorthwindEntities context = new NorthwindEntities();
-            var query = from product in context.Products
-                        select product.ProductName;
-            products = query.ToList();
+
+            try
+            {
+                var query = from product in context.Products
+                            select product.ProductName;
+                products = query.ToList();
+            }
+            finally
+            {
+                if (context != null)
+                {
+                    context.Dispose();
+                }
+            }
+
             products.Insert(0, "(from data source)");
             
-            if (enableCache && dataCache != null)
+            if (this.enableCache && dataCache != null)
             {
                 dataCache.Add("products", products, TimeSpan.FromSeconds(30));
             }
