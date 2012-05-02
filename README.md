@@ -10,6 +10,8 @@ In this lab, learn how to use the Windows Azure Caching service for both your AS
 
 > **Note:** You can download the latest build of the Windows Azure Training Kit which includes a tested version of this HOL from here: http://bit.ly/WindowsAzureTK.
 
+Visit our [GitHub Homepage](https://windowsazure-trainingkit.github.com/) for more information about the **Windows Azure Training Kit**.
+
 ### Repository Structure ###
 
 In the **root** folder of this repository you will find the Hands-On Lab (HOL) document, **HOL.md**. Before beginning with the HOL exercises, make sure you have followed all the required steps indicated at the setup section of the HOL document. 
