@@ -2,7 +2,7 @@
 %~d0
 CD "%~dp0"
 
-ECHO Install Visual Studio 2010 Code Snippets for the lab:
+ECHO Install Visual Studio 2012 Code Snippets for the lab:
 ECHO -------------------------------------------------------------------------------
 CALL .\Scripts\InstallCodeSnippets.cmd
 ECHO Done!
@@ -10,9 +10,9 @@ ECHO.
 ECHO *******************************************************************************
 ECHO.
 CD "%~dp0"
-ECHO Create SQL Azure Northwind database:
+ECHO Create Windows Azure SQL Database:
 ECHO -------------------------------------------------------------------------------
-CALL .\Scripts\SetupAzureDatabase.cmd
+CALL .\Scripts\SetupSqlDatabase.cmd
 ECHO Done!
 ECHO.
 ECHO *******************************************************************************

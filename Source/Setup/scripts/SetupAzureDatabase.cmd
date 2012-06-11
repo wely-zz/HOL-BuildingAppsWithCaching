@@ -9,9 +9,9 @@ cd "%~dp0"
 @REM  -------------------------------------------------------------
 
 :select
-SET /p sqlServer=Please enter the SQL Azure Server Address (e.g: yourserver.database.windows.net):
-SET /p User=Please enter the User to connect to SQL Azure (e.g: yourusername@yourserver):
-SET /p Password=Please enter the Password to Connect to SQL Azure:
+SET /p sqlServer=Please enter the Windows Azure SQL Server Address (e.g: yourserver.database.windows.net):
+SET /p User=Please enter the User to connect to your Windows Azure SQL Database (e.g: yourusername@yourserver):
+SET /p Password=Please enter the Password to Connect to Windows Azure SQL Database:
 SET dbName=Northwind2
 
 echo.
@@ -40,7 +40,7 @@ OSQL -S %sqlServer% -d "%dbName%" -U %User% -P %Password% -b -n -i "NorthwindPro
 
 echo =============================================================================
 echo SUCCESS: '%dbName%' database created on '%sqlServer%'
-echo REMEMBER change the connection string for each begin end solutions with your SQL Azure account
+echo REMEMBER change the connection string for each begin end solutions with your Windows Azure SQL Database account
 echo =============================================================================
 GOTO EXIT
 

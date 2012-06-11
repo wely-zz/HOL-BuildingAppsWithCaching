@@ -1,18 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <DependencyCheckerConfiguration version="2.0">
-	<title>Building Windows Azure Apps with Caching Service</title>
+	<title>Building Windows Azure Cloud Services with Cache Service</title>
 	<dependencies>
 		<dependency 
-			hint="WindowsAzureToolsVS2010" 
-			name="Windows Azure Tools for Microsoft Visual Studio 2010 v1.6" 
-			helpLink="http://go.microsoft.com/fwlink/?LinkID=128752" 
+			hint="WindowsAzureToolsVS2012" 
+			name="Windows Azure Tools for Microsoft Visual Studio 2012 RC (June 2012)" 
+			helpLink="http://go.microsoft.com/fwlink/?LinkID=231172" 
 			disableSkip="false"
 			type="WebPI" />
 		<dependency
-			hint="WindowsAzureLibrariesNET"
-			name="Windows Azure Libraries for .NET 1.6"
-			helpLink="http://www.microsoft.com/web/gallery/install.aspx?appid=WindowsAzureLibrariesNET"
-			type="WebPI" />
+                	hint="Microsoft Visual Studio (?:Ultimate 2012 RC|Premium 2012 RC|Professional 2012 RC|Express 2012 for Windows 8).*;11.0"
+                	name="Microsoft Visual Studio 2012"
+                	description="Microsoft Visual Studio Ultimate 2012, Microsoft Visual Studio Premium 2012, Microsoft Visual Studio Professional 2012 or Microsoft Visual Studio Express 2012 for Windows 8"
+                	helpLink="http://www.microsoft.com/visualstudio/11/en-us"     
+					disableSkip="false"					
+                	type="Uninstall" />
     </dependencies>
   <setupCommands>
     <setup 
