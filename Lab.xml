@@ -11,7 +11,7 @@
     </Email>
     <Name>wwegner</Name>
   </Author>
-  <Description>In this hands-on lab you will learn how to easily enable Cache service on your Cloud Service roles utilizing free memory space on your virtual machines. You’ll go through the process of setting up persistent session states as well as using in-memory cache to avoid repetitive database queries.  At last, you’ll build an abstraction layer on top of different caching providers.</Description>  
+  <Description>In this hands-on lab you will learn how to easily enable Cache service on your Cloud Service roles utilizing free memory space on your virtual machines. You'll go through the process of setting up persistent session states as well as using in-memory cache to avoid repetitive database queries.  At last, you'll build an abstraction layer on top of different caching providers.</Description>  
   <Document ConversionType="Html">.\HOL.md</Document>  
   <Title>Building Windows Azure Cloud Services with Cache Service</Title>
   <Version>2.1.0</Version>

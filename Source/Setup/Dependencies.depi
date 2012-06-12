@@ -9,7 +9,7 @@
 			disableSkip="false"
 			type="WebPI" />
 		<dependency
-                	hint="Microsoft Visual Studio (?:Ultimate 2012 RC|Premium 2012 RC|Professional 2012 RC|Express 2012 for Windows 8).*;11.0"
+                	hint="Microsoft Visual Studio Ultimate 2012 RC.*;11.0"
                 	name="Microsoft Visual Studio 2012"
                 	description="Microsoft Visual Studio Ultimate 2012, Microsoft Visual Studio Premium 2012, Microsoft Visual Studio Professional 2012 or Microsoft Visual Studio Express 2012 for Windows 8"
                 	helpLink="http://www.microsoft.com/visualstudio/11/en-us"     
