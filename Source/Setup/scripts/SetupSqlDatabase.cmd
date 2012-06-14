@@ -29,12 +29,15 @@ IF ERRORLEVEL 2 GOTO select
 
 echo IN PROGRESS: Dropping database '%dbName%' on '%sqlServer%' if it exists...
 OSQL -S %sqlServer% -U %User% -P %Password% -b -n -d master -Q "DROP DATABASE [%dbName%]"
+IF ERRORLEVEL 1 GOTO ERROR
 
 echo IN PROGRESS: Creating database '%dbName%' on '%sqlServer%'...
 OSQL -S %sqlServer% -U %User% -P %Password% -b -n -d master -Q "CREATE DATABASE [%dbName%]"
+IF ERRORLEVEL 1 GOTO ERROR
 
 echo IN PROGRESS: Creating tables in '%dbName%' database on '%sqlServer%'...
 OSQL -S %sqlServer% -d "%dbName%" -U %User% -P %Password% -b -n -i "NorthwindProducts.sql"
+IF ERRORLEVEL 1 GOTO ERROR
 
 
 
