@@ -3,9 +3,9 @@
 	<title>Building Windows Azure Cloud Services with Cache Service</title>
 	<dependencies>
 		<dependency 
-			hint="WindowsAzureToolsVS2012" 
-			name="Windows Azure Tools for Microsoft Visual Studio 2012 RC (June 2012)" 
-			helpLink="http://go.microsoft.com/fwlink/?LinkID=231172" 
+			hint="VWDOrVs11AzurePack_RC" 
+			name="Windows Azure SDK for .NET" 
+			helpLink="" 
 			disableSkip="false"
 			type="WebPI" />
 		<dependency
