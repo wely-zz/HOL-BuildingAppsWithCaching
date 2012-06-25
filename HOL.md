@@ -6,7 +6,7 @@
 <a name="Overview" />
 ## Overview ##
 
-Windows Azure Cache Service provides a distributed, cost-effective in-memory cache for your Clouse Services. Witch Cache service enabled on your Cloud Service roles, you can utilize spare memory on your service hosts as high performance cache to improve response time and system throughput. And because the cache hosts are collated with your Cloud Service roles, you get optimum access time by avoiding external service calls. In this lab, you will learn how to easily enable Cache service on your Cloud Service roles, and how to use Cache service to provide high performance in-memory caching to your Cloud Services.
+Windows Azure Cache Service provides a distributed, cost-effective in-memory cache for your cloud Services. With Cache service enabled on your Cloud Service roles, you can utilize spare memory on your service hosts as high performance cache to improve response time and system throughput. And because the cache hosts are collated with your Cloud Service roles, you get optimum access time by avoiding external service calls. In this lab, you will learn how to easily enable Cache service on your Cloud Service roles, and how to use Cache service to provide high performance in-memory caching to your Cloud Services.
 
 <a name="Objectives" />
 ### Objectives ###
