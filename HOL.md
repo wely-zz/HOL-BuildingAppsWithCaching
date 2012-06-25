@@ -6,15 +6,15 @@
 <a name="Overview" />
 ## Overview ##
 
-Windows Azure Cache Service provides a distributed, cost-effective in-memory cache for your cloud Services. With Cache service enabled on your Cloud Service roles, you can utilize spare memory on your service hosts as high performance cache to improve response time and system throughput. And because the cache hosts are collated with your Cloud Service roles, you get optimum access time by avoiding external service calls. In this lab, you will learn how to easily enable Cache service on your Cloud Service roles, and how to use Cache service to provide high performance in-memory caching to your Cloud Services.
+Windows Azure Cache Service provides a distributed, cost-effective in-memory cache for your Cloud Services. With Cache Service enabled on your Cloud Services roles, you can utilize spare memory on your service hosts as high performance cache to improve response time and system throughput. And because the cache hosts are collocated with your Cloud Service roles, you get optimal access time by avoiding external service calls. In this lab, you will learn how easy it is to enable Cache Service on your Cloud Services roles, and how to use Cache Service to provide high performance in-memory caching to your Cloud Services.
 
 <a name="Objectives" />
 ### Objectives ###
 In this hands-on lab, you will learn how to:
 
 - Easily and quickly enable Cache service.
-- Use Cache service for your Asp.Net session state.
-- Cache reference data from Windows Azure SQL Database in Cache service.
+- Use Cache Service for your Asp.Net session state.
+- Cache reference data from Windows Azure SQL Database in Cache Service.
 - Create a reusable and extensible caching layer for your Cloud Services.
 
 During this lab, you will explore how to use these features in a simple Asp.Net MVC4 application.
@@ -34,7 +34,7 @@ The following is required to complete this hands-on lab:
 
 <a name="Setup" />
 ### Setup ###
-In order to execute the exercises in this hands-on lab you need to set up your environment.
+In order to run the exercises in this hands-on lab you need to set up your environment first.
 
 1. Open a Windows Explorer window and browse to the lab’s **Source** folder.
 1. Right-click on **Setup.cmd** and select Run as Administrator to launch the setup process that will configure your environment and install the Visual Studio code snippets for this lab.
