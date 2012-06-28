@@ -202,7 +202,7 @@ During the exercise, you will update the data access code with a trivial impleme
 <a name="Ex2Task1" />
 #### Task 1 – Caching Data Retrieved from the SQL Reporting ####
 
-To make use of the Windows Azure Caching service, you first need to create a **DataCacheFactory** object. This object determines the cache cluster connection information, which is set programmatically or by reading settings from the configuration file. Typically, you create an instance of the factory class and use it for the lifetime of the application. To store data in the cache, you request a **DataCache** instance from the **DataCacheFactory** and then use it to add or retrieve items from the cache.
+To make use of Windows Azure Caching, you first need to create a **DataCacheFactory** object. This object determines the cache cluster connection information, which is set programmatically or by reading settings from the configuration file. Typically, you create an instance of the factory class and use it for the lifetime of the application. To store data in the cache, you request a **DataCache** instance from the **DataCacheFactory** and then use it to add or retrieve items from the cache.
 In this task, you update the data access code to cache the result of queries to Windows Azure SQL Database using the Windows Azure Caching. 
 
 1. Start **Microsoft Visual Studio 2012** as an administrator.
@@ -494,7 +494,7 @@ In this task, you will update the application to allow control of the use of the
 <a name="Ex2Task3"></a>
 #### Task 3 – Enabling the Local Cache ####
 
-When using the Windows Azure Caching service, you have the option of using a local cache that allows objects to be cached in-memory at the client, as well as being stored in the cache cluster. In this task, you will enable the local cache and then compare the access time with the remote case.
+When using Windows Azure Caching, you have the option of using a local cache that allows objects to be cached in-memory at the client, as well as being stored in the cache cluster. In this task, you will enable the local cache and then compare the access time with the remote case.
 
 1. Open the **ProductsRepository.cs** file in the **Services** folder of the **MvcAzureStore** project.
 
