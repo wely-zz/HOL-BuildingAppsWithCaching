@@ -26,7 +26,7 @@ The following is required to complete this hands-on lab:
 
 - [Microsoft Visual Studio 2012][1]
 - [Windows Azure Tools for Microsoft Visual Studio 1.7][2]
-- A Windows Azure subscription - you can [sign up for free trial](http://aka.ms/WATK-FreeTrial)
+- A Windows Azure subscription - [sign up for a free trial](http://aka.ms/WATK-FreeTrial)
 
 [1]: http://www.microsoft.com/visualstudio/11/en-us
 [2]: http://www.windowsazure.com/en-us/develop/downloads/
