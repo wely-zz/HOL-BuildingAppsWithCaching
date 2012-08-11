@@ -1,4 +1,4 @@
-﻿<a name="HOLTop" />
+<a name="HOLTop" />
 # Building Windows Azure Cloud Services with Cache Service #
 
 ---
@@ -25,10 +25,12 @@ During this lab, you will explore how to use these features in a simple Asp.Net 
 The following is required to complete this hands-on lab:
 
 - [Microsoft Visual Studio 2012][1]
-- [Windows Azure Tools for Microsoft Visual Studio 1.7][2] 
+- [Windows Azure Tools for Microsoft Visual Studio 1.7][2]
+- A Windows Azure subscription - you can [sign up for free trial](http://aka.ms/WATK-FreeTrial)
 
 [1]: http://www.microsoft.com/visualstudio/11/en-us
 [2]: http://www.windowsazure.com/en-us/develop/downloads/
+[3]: http://aka.ms/WATK-FreeTrial
 
 >**Note:** This lab was designed to use Windows 8 Operating System.  This hands-on lab has been designed to use the latest release of the Windows Azure Tools for Visual Studio 2012 (version 1.7).
 
