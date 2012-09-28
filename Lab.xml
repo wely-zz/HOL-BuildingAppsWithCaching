@@ -18,6 +18,7 @@
   <Source>.\Source</Source>
   <DependencyChecker>.\source\Setup\Dependencies.depi</DependencyChecker>
   <CustomProperties>
+    	<Property Name="ContentType" Value="VS2012" />
 	<Property Name="GitHubRepository" Value="https://github.com/WindowsAzure-TrainingKit/HOL-BuildingAppsWithCaching" />
   </CustomProperties>  
 </Lab> 
