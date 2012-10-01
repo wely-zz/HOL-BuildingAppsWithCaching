@@ -3,18 +3,18 @@
 	<title>Building Windows Azure Cloud Services with Cache Service</title>
 	<dependencies>
 		<dependency 
-			hint="VWDOrVs11AzurePack_RC" 
+			hint="VWDOrVs11AzurePack" 
 			name="Windows Azure SDK for .NET" 
 			helpLink="" 
 			disableSkip="false"
 			type="WebPI" />
-		<dependency
-                	hint="Microsoft Visual Studio Ultimate 2012 RC.*;11.0"
-                	name="Microsoft Visual Studio 2012"
-                	description="Microsoft Visual Studio Ultimate 2012, Microsoft Visual Studio Premium 2012, Microsoft Visual Studio Professional 2012 or Microsoft Visual Studio Express 2012 for Windows 8"
-                	helpLink="http://www.microsoft.com/visualstudio/11/en-us"     
-					disableSkip="false"					
-                	type="Uninstall" />
+		<dependency hint="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\DevDiv\Web Tools\Servicing\1~.0\VWDExpress11.Version,HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\DevDiv\Web Tools\Servicing\1~.0\VWDExpress11.Version,HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\DevDiv\Web Tools\Servicing\1~.0\VisualStudio11.Version,HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\DevDiv\Web Tools\Servicing\1~.0\VisualStudio11.Version;^1\.[0-9]\.([3-9][0-9]\d*).[0-9]$"
+                                                name="Visual Studio Web Development Feature Or Visual Studio Express 2012 for Web"
+                                                description="Microsoft Visual Studio Ultimate 2012, Microsoft Visual Studio Premium 2012, Microsoft Visual Studio Professional 2012 or Microsoft Visual Studio Express 2012 for Web"
+                                                helpLink="http://www.microsoft.com/visualstudio/"
+                                                disableSkip="false"
+                type="Registry" />
+
     </dependencies>
   <setupCommands>
     <setup 

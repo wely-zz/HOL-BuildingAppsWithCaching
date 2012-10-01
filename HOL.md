@@ -1,4 +1,4 @@
-<a name="HOLTop" />
+﻿<a name="HOLTop" />
 # Building Windows Azure Cloud Services with Cache Service #
 
 ---
@@ -88,15 +88,18 @@ In this task, you will run the Azure Store application in the compute emulator u
 
 	>**Important:** 	Before you execute the solution, make sure that the start-up project is set. For MVC projects, the start page must be left blank.
 
-	>To set the start-up project, in **Solution Explorer**, right-click the **MvcAzureStore.Azure** project and select **Set as StartUp Project**.
+	>To set the start-up project, in **Solution Explorer**, right-click the **CloudShop.Azure** project and select **Set as StartUp Project**.
 	
-	>To set the start page, in **Solution Explorer**, right-click the **MvcAzureStore** project and select **Properties**. In the **Properties** window, select the **Web** tab and in the **Start Action**, select **Specific Page**. Leave the value of this field blank.
+	>To set the start page, in **Solution Explorer**, right-click the **CloudShop** project and select **Properties**. In the **Properties** window, select the **Web** tab and in the **Start Action**, select **Specific Page**. Leave the value of this field blank.
 
 1. In the **Web.config** file, update the _NorthwindEntities_ connection string to point to your database. Replace **[YOUR-SQL-DATABASE-SERVER-ADDRESS]**, **[SQL-DATABASE-USERNAME]**, and **[SQL-DATABASE-PASSWORD]** in the connectionStrings section with the Windows Azure SQL Database server name, Administrator Username and Administrator password that you registered at the portal and used for creating the database during setup.
 
 	>**Note:** Make sure that you follow the instructions of the setup section to create a copy of the Northwind2 database in your own Windows Azure SQL Database account and configure your Windows Azure SQL Database firewall settings.
 
-1. Press **F5** to build and run the application in the compute emulator. 
+1. Press **CTRL** + **F5** to build and run the application withouth debugging in the compute emulator. 
+
+	>**Note:** Make sure that you run the application without debugging. With debugging mode you won't be able to recycle the web role
+
 1. Explore the main page of the application, the **Products** page, which displays a list of products obtained from a Windows Azure SQL Database.
 
 	![Azure Store products page](images/azure-store-products-page.png?raw=true "Azure Store products page")
@@ -130,7 +133,7 @@ In this task, you will run the Azure Store application in the compute emulator u
 #### Task 2 – Adding a dedicated caching role ####
 In this task, you will add a new worker role that serves as a dedicated cache host. All other web roles and worker roles in the Cloud Service will be able to access the Cache service hosted by this role. You can set up multiple such dedicated work roles within your Cloud Service. In addition, you can also enable Cache service on any of the existing roles and allocate certain percentage of virtual machine memory to be used as cache. 
 
-1. In solution explorer, expand **MvcAzureStore.Azure** node, and then right-click on **Roles**. Then, select **Add**->**New Worker Role Project...***.
+1. In solution explorer, expand **CloudShop.Azure** node, and then right-click on **Roles**. Then, select **Add**->**New Worker Role Project...***.
 2. In **Add New Role Project** dialog, select **Cache Worker Role** template. Name the role as **CacheWorkerRole**, and then click "Add".
 
   >**Note:** All Cache hosts in your Cloud Service share their runtime states via a Windows Azure Blog Storage. By default, a cache work role is configured to use development storage. You can change this setting in **Caching** tab on the role property page. 
@@ -138,17 +141,17 @@ In this task, you will add a new worker role that serves as a dedicated cache ho
 <a name="Ex1Task3" />
 #### Task 3 – Configuring Session State Using Windows Azure Cache service ####
 
-In this task, you will change the Session State provider to take advantage of the Windows Azure Cache as the storage mechanism. This requires adding the appropriate assemblies to the **MvcAzureStore** project and then updating the corresponding configuration in the **Web.config** file. 
+In this task, you will change the Session State provider to take advantage of the Windows Azure Cache as the storage mechanism. This requires adding the appropriate assemblies to the **CloudShop** project and then updating the corresponding configuration in the **Web.config** file. 
 
 1. In Visual Studio 2012, open **Package manager Console** from **Tools**->**Library package Manager**->**Package Manager Console** menu.
 
-1. Make sure that **MvcAzureStore** is selected in the **Default project** drop-down list. Issue the following command to install the Nuget package for Cache service:  
+1. Make sure that **CloudShop** is selected in the **Default project** drop-down list. Issue the following command to install the Nuget package for Cache service:  
  
 	````PowerShell
 	Install-package Microsoft.WindowsAzure.Caching 
 	````
    
-1. Open the **Web.config** file located in the root folder of the **MvcAzureStore** project.
+1. Open the **Web.config** file located in the root folder of the **CloudShop** project.
 1. Change **[cache cluster role name]** to **CacheWorkerRole**.
 
 	<!--mark: 4-->
@@ -211,14 +214,14 @@ In this task, you update the data access code to cache the result of queries to 
 1. Open the **Begin** solution located at **Source\\Ex2-CachingData\\Begin**.
 
 	>**Important:** Before you execute the solution, make sure that the start-up project is set. For MVC projects, the start page must be left blank. 
-	> To set the startup project, in **Solution Explorer**, right-click the **MvcAzureStore.Azure** project and then select **Set as StartUp Project**. 
-	> To set the start page, in **Solution Explorer**, right-click the **MvcAzureStore** project and select **Properties**. In the **Properties** window, select the **Web** tab and in the **Start Action**, select **Specific Page**. Leave the value of this field blank.
+	> To set the startup project, in **Solution Explorer**, right-click the **CloudShop.Azure** project and then select **Set as StartUp Project**. 
+	> To set the start page, in **Solution Explorer**, right-click the **CloudShop** project and select **Properties**. In the **Properties** window, select the **Web** tab and in the **Start Action**, select **Specific Page**. Leave the value of this field blank.
 
 1. In the **Web.config** file, update the _NorthwindEntities_ connection string to point to your database. Replace **[YOUR-SQL-DATABASE-SERVER-ADDRESS]**, **[SQL-DATABASE-USERNAME]**, and **[SQL-DATABASE-PASSWORD]** with the Windows Azure SQL Database server name, Administrator Username and Administrator password that you registered at the portal and used for creating the database during setup.
 
 	> **Note:** 	Make sure that you follow the instructions of the setup section to create a copy of the Northwind2 database in your own Windows Azure SQL Database account and configure your Windows Azure SQL Database firewall settings.
 
-1. Open the **ProductsRepository.cs** file in the **Services** folder of the **MvcAzureStore** project.
+1. Open the **ProductsRepository.cs** file in the **Services** folder of the **CloudShop** project.
 1. Add a namespace directive for **Microsoft.ApplicationServer.Caching**.
 
 	<!--mark: 5-->
@@ -226,7 +229,7 @@ In this task, you update the data access code to cache the result of queries to 
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
-	using MvcAzureStore.Models;
+	using CloudShop.Models;
 	using Microsoft.ApplicationServer.Caching;
 	...
 	````
@@ -463,7 +466,7 @@ In this task, you will update the application to allow control of the use of the
 	  ...
 	  public ActionResult EnableCache(bool enabled)
 	  {
-	    this.Session["EnableCache"] = !((bool)this.Session["EnableCache"]);
+	    this.Session["EnableCache"] = enabled;
 	    return RedirectToAction("Index");
 	  }
 	 }
@@ -498,11 +501,11 @@ In this task, you will update the application to allow control of the use of the
 
 When using Windows Azure Caching, you have the option of using a local cache that allows objects to be cached in-memory at the client, as well as being stored in the cache cluster. In this task, you will enable the local cache and then compare the access time with the remote case.
 
-1. Open the **ProductsRepository.cs** file in the **Services** folder of the **MvcAzureStore** project.
+1. Open the **ProductsRepository.cs** file in the **Services** folder of the **CloudShop** project.
 
 	>**Note:** Make sure your solution is not running before editing the files.
 
-1. In the **ProductsRepository** class, replace the current fields and constructor with the following code, to add the logic of managing the localCache configuration.
+1. In the **ProductsRepository** class, replace the current member fields and the constructor with the following code, to add the logic for managing the localCache configuration.
 
 	(Code Snippet - _BuildingAppsWithCachingService-Ex2-ProductsRepository with local cache-CS_)
 	<!--mark: 2-34-->
@@ -615,7 +618,7 @@ When using Windows Azure Caching, you have the option of using a local cache tha
 	  ...
 	  public ActionResult EnableLocalCache(bool enabled)
 	  {
-	    this.Session["EnableLocalCache"] = !((bool)this.Session["EnableLocalCache"]);
+	    this.Session["EnableLocalCache"] = enabled;
 	    return RedirectToAction("Index");
 	  }
  }
@@ -634,7 +637,7 @@ When using Windows Azure Caching, you have the option of using a local cache tha
 		 }
 		 else
 		 {
-			  <span>@Html.ActionLink("Yes", "EnableCache", new { enabled = false })</span><span> | No</span>
+			  <span>@Html.ActionLink("Yes", "EnableCache", new { enabled = true })</span><span> | No</span>
 		 }
 		 <br />
 		 @if(Model.IsCacheEnabled)
@@ -646,7 +649,7 @@ When using Windows Azure Caching, you have the option of using a local cache tha
 			  }
 			  else
 			  {
-					<span>@Html.ActionLink("Yes", "EnableLocalCache", new { enabled = false })</span><span> | No</span>
+					<span>@Html.ActionLink("Yes", "EnableLocalCache", new { enabled = true })</span><span> | No</span>
 			  }
 		 }
 		 <div id="elapsedTime">Elapsed time: @Model.ElapsedTime.ToString() milliseconds.</div>
@@ -706,17 +709,17 @@ In this task, you will create the abstract class that you will use as the base c
 
 	>**Important:** 	Before you execute the solution, make sure that the start-up project is set. For MVC projects, the start page must be left blank.  
 	
-	> To set the start up project, in **Solution Explorer**, right-click the **MvcAzureStore.Azure** project and then select **Set as StartUp Project**. 
+	> To set the start up project, in **Solution Explorer**, right-click the **CloudShop.Azure** project and then select **Set as StartUp Project**. 
 
-	> To set the start page, in **Solution Explorer**, right-click the **MvcAzureStore** project and select **Properties**. In the **Properties** window, select the **Web** tab and in the **Start Action**, select **Specific Page**. Leave the value of this field blank.
+	> To set the start page, in **Solution Explorer**, right-click the **CloudShop** project and select **Properties**. In the **Properties** window, select the **Web** tab and in the **Start Action**, select **Specific Page**. Leave the value of this field blank.
 
 1. In the **Web.config** file, update the _NorthwindEntities_ connection string to point to your database. Replace **[YOUR-SQL-DATABASE-SERVER-ADDRESS]**, **[SQL-DATABASE-USERNAME]**, and **[SQL-DATABASE-PASSWORD]** with the Windows Azure SQL Database server name, Administrator Username and Administrator password that you registered at the portal and used for creating the database during setup.
 
 	>**Note:** 	Make sure that you follow the instructions of the setup section to create a copy of the Northwind2 database in your own Windows Azure SQL Database account and configure your Windows Azure SQL Database firewall settings.
 
-1. Add a reference to the **System.Runtime.Caching** assembly in the **MvcAzureStore** project.
+1. Add a reference to the **System.Runtime.Caching** assembly in the **CloudShop** project.
 
-1. In the **Services** folder of the **MvcAzureStore** project, add a new folder named **Caching**.
+1. In the **Services** folder of the **CloudShop** project, add a new folder named **Caching**.
 
 1. Inside the **Caching** folder created in the previous step, add a new class file named **CachedDataSource.cs**.
 
@@ -832,9 +835,9 @@ In this task, you will create the abstract class that you will use as the base c
 
 Once you have created an abstract base class for caching data sources, you will now create a concrete implementation that will provide a caching alternative for the **ProductsRepository** class. This task represents the steps you would typically follow when creating a caching layer for your data access code using the **CachedDataSource** class.
 
-1. Inside the **Services\Caching** folder of the **MvcAzureStore** project, add a new class file named **CachedProductsRepository.cs**.
+1. Inside the **Services\Caching** folder of the **CloudShop** project, add a new class file named **CachedProductsRepository.cs**.
 
-1. In the new class file, append a namespace directive for **System.Runtime.Caching** and **MvcAzureStore.Services**.
+1. In the new class file, append a namespace directive for **System.Runtime.Caching** and **CloudShop.Services**.
 
 	<!-- mark:5-6 -->
 	````C#
@@ -842,7 +845,7 @@ Once you have created an abstract base class for caching data sources, you will 
 	using System.Collections.Generic;
 	using System.Linq;
 	using System.Web;
-	using MvcAzureStore.Services
+	using CloudShop.Services
 	using System.Runtime.Caching;
 	...
 	````
@@ -905,16 +908,16 @@ Once you have created an abstract base class for caching data sources, you will 
 
 In this task, you will create a factory class that can return data source instances. The factory determines the cache provider to use from the application configuration settings and returns a data source suitably configured to use the chosen cache provider.
 
-1. Add a copy of the **AzureCacheProvider.cs** file located in the **\\Source\\Assets** folder to the **MvcAzureStore** project and place it in its **Services\Caching** folder.
+1. Add a copy of the **AzureCacheProvider.cs** file located in the **\\Source\\Assets** folder to the **CloudShop** project and place it in its **Services\Caching** folder.
 
 	>**Note:** The **AzureCacheProvider** class implements an **ObjectCache** that wraps the services provided by the Windows Azure Cache Service.
 
-1. Inside the **Services** folder of the **MvcAzureStore** project, add a new class file named **DataSourceFactory.cs**.
+1. Inside the **Services** folder of the **CloudShop** project, add a new class file named **DataSourceFactory.cs**.
 
-1. In the new class file, insert namespace directives for **System.Configuration**, **System.Runtime.Caching**, **MvcAzureStore.Services** and **MvcAzureStore.Services.Caching**.
+1. In the new class file, insert namespace directives for **System.Configuration**, **System.Runtime.Caching**, **CloudShop.Services** and **CloudShop.Services.Caching**.
 
 	(Code Snippet - _BuildingAppsWithCachingService-Ex3-DataSourceFactory namespaces-CS_)
-	<!--mark: 5-7-->
+	<!--mark: 5-8-->
 	````C#
 	using System;
 	using System.Collections.Generic;
@@ -922,8 +925,8 @@ In this task, you will create a factory class that can return data source instan
 	using System.Web;
 	using System.Configuration;
 	using System.Runtime.Caching;
-	using MvcAzureStore.Services;
-	using MvcAzureStore.Services.Caching;
+	using CloudShop.Services;
+	using CloudShop.Services.Caching;
 	````
 
 1. Now, add the following code to define a type constructor for the **DataSourceFactory** class and declare a static field that holds a reference to the configured cache service provider, as shown (highlighted) below.
@@ -1011,7 +1014,7 @@ In this task, you will update the application to take advantage of the data sour
 	
 		// retrieve product catalog from repository and measure the elapsed time
 		Services.IProductRepository productRepository =
-		MvcAzureStore.Services.DataSourceFactory.GetProductsRepository(enableCache);
+		CloudShop.Services.DataSourceFactory.GetProductsRepository(enableCache);
 		Stopwatch stopWatch = new Stopwatch();
 		stopWatch.Start();
 		...

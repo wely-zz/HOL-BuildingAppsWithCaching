@@ -28,15 +28,15 @@ CHOICE /C YN /D Y /T 10 /M "Are these values correct"
 IF ERRORLEVEL 2 GOTO select
 
 echo IN PROGRESS: Dropping database '%dbName%' on '%sqlServer%' if it exists...
-OSQL -S %sqlServer% -U %User% -P %Password% -b -n -d master -Q "DROP DATABASE [%dbName%]"
+SQLCMD -S %sqlServer% -U %User% -P %Password% -d master -Q "DROP DATABASE [%dbName%]"
 IF ERRORLEVEL 1 GOTO ERROR
 
 echo IN PROGRESS: Creating database '%dbName%' on '%sqlServer%'...
-OSQL -S %sqlServer% -U %User% -P %Password% -b -n -d master -Q "CREATE DATABASE [%dbName%]"
+SQLCMD -S %sqlServer% -U %User% -P %Password% -b -d master -Q "CREATE DATABASE [%dbName%]"
 IF ERRORLEVEL 1 GOTO ERROR
 
 echo IN PROGRESS: Creating tables in '%dbName%' database on '%sqlServer%'...
-OSQL -S %sqlServer% -d "%dbName%" -U %User% -P %Password% -b -n -i "NorthwindProducts.sql"
+SQLCMD -S %sqlServer% -d "%dbName%" -U %User% -P %Password% -b -i "NorthwindProducts.sql"
 IF ERRORLEVEL 1 GOTO ERROR
 
 
@@ -44,7 +44,7 @@ IF ERRORLEVEL 1 GOTO ERROR
 echo =============================================================================
 echo SUCCESS: '%dbName%' database created on '%sqlServer%'
 echo REMEMBER change the connection string for each begin end solutions with your Windows Azure SQL Database account
-echo =============================================================================
+echo =========================================================================isq====
 GOTO EXIT
 
 :ERROR

@@ -1,17 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "MvcAzureStore.Azure", "MvcAzureStore.Azure\MvcAzureStore.Azure.ccproj", "{7568184F-CB2F-4D0B-848D-62D5058D9635}"
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "CloudShop.Azure", "CloudShop.Azure\CloudShop.Azure.ccproj", "{7568184F-CB2F-4D0B-848D-62D5058D9635}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcAzureStore", "MvcAzureStore\MvcAzureStore.csproj", "{07C5610E-4231-4556-9989-9A07FFAA33BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudShop", "CloudShop\CloudShop.csproj", "{07C5610E-4231-4556-9989-9A07FFAA33BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheWorkerRole", "CacheWorkerRole\CacheWorkerRole.csproj", "{7229AB93-FF8E-47D9-864F-AC3E48811301}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{B3415844-A9CF-48CD-8489-ECE39A11671F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{84172C4C-83BE-494F-B1B1-0FA42FE2EF09}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheWorkerRole", "CacheWorkerRole\CacheWorkerRole.csproj", "{7229AB93-FF8E-47D9-864F-AC3E48811301}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

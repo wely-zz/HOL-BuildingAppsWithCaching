@@ -1,0 +1,36 @@
+@model CloudShop.Models.IndexViewModel
+
+@section featured {
+<section class="featured">
+    <div class="content-wrapper">
+        <hgroup class="title">
+            <h1>Products</h1>
+        </hgroup>
+    </div>
+</section>
+}
+<label for="items">Select a product from the list:</label>
+<h3>Instance ID: @Model.InstanceId - Object ID: @Model.ObjectId</h3>
+@using (Html.BeginForm("Add","Home")) {
+<select name="selectedItem" class="product-list" id="items" size="14">
+    @foreach (string product in Model.Products) {
+        <option value="@product">@product</option>
+        }
+</select>
+<a href="javascript:document.forms[0].submit();">Add item to cart</a>
+    }
+<p>@Html.ActionLink("Recycle", "Recycle", "Home")</p>
+<fieldset>
+    <legend>Cache settings for product data</legend>Enable Cache:
+    @if (Model.IsCacheEnabled)
+    {
+        <span>Yes |</span><span>@Html.ActionLink("No", "EnableCache", new { enabled = false })</span>
+    }
+    else
+    {
+        <span>@Html.ActionLink("Yes", "EnableCache", new { enabled = true })</span><span> | No</span>
+    }
+    <br />
+    <div id="elapsedTime">Elapsed time: @Model.ElapsedTime.ToString() milliseconds.</div>
+</fieldset>
+
