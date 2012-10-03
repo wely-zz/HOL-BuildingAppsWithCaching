@@ -1,4 +1,4 @@
-﻿namespace MvcAzureStore.Services.Caching
+﻿namespace CloudShop.Services.Caching
 {
     using System;
     using System.Collections.Generic;
