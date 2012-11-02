@@ -17,6 +17,7 @@
         <option value="@product">@product</option>
         }
 </select>
+
 <a href="javascript:document.forms[0].submit();">Add item to cart</a>
     }
 <p>@Html.ActionLink("Recycle", "Recycle", "Home")</p>
@@ -31,16 +32,16 @@
         <span>@Html.ActionLink("Yes", "EnableCache", new { enabled = true })</span><span> | No</span>
     }
     <br />
-    @if (Model.IsCacheEnabled)
-    {
-        <span>Use Local Cache:</span>
-         if (Model.IsLocalCacheEnabled)
-         {
-        <span>Yes |</span><span>@Html.ActionLink("No", "EnableLocalCache", new { enabled = false })</span>
+    @if(Model.IsCacheEnabled)
+     {
+          <span>Use Local Cache:</span>
+          if (Model.IsLocalCacheEnabled)
+          {
+                <span>Yes |</span><span>@Html.ActionLink("No", "EnableLocalCache", new { enabled = false })</span>
           }
           else
           {
-        <span>@Html.ActionLink("Yes", "EnableLocalCache", new { enabled = true })</span><span> | No</span>
+                <span>@Html.ActionLink("Yes", "EnableLocalCache", new { enabled = true })</span><span> | No</span>
           }
      }
     <div id="elapsedTime">Elapsed time: @Model.ElapsedTime.ToString() milliseconds.</div>

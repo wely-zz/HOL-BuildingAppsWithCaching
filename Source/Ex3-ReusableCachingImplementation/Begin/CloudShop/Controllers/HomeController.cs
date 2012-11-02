@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.WindowsAzure.ServiceRuntime;
 using CloudShop.Models;
+using System.Diagnostics;
 
 namespace CloudShop.Controllers
 {
@@ -83,11 +83,11 @@ namespace CloudShop.Controllers
 
             return RedirectToAction("Checkout");
         }
-		
+
         public ActionResult EnableCache(bool enabled)
         {
             this.Session["EnableCache"] = enabled;
             return RedirectToAction("Index");
         }
-	}
+    }
 }

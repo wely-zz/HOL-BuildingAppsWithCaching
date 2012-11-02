@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -27,11 +24,11 @@ namespace CloudShop
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
         }
- 
+
         protected void Session_Start()
         {
             this.Session["EnableCache"] = false;
             this.Session["EnableLocalCache"] = false;
         }
-	}
+    }
 }

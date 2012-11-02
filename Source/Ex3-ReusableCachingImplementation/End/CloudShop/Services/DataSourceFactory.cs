@@ -45,6 +45,5 @@ namespace CloudShop.Services
 
             return dataSource;
         }
-
     }
 }

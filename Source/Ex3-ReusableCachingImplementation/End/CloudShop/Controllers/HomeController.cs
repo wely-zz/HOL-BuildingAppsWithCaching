@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.WindowsAzure.ServiceRuntime;
 using CloudShop.Models;
+using System.Diagnostics;
 
 namespace CloudShop.Controllers
 {
@@ -28,8 +28,8 @@ namespace CloudShop.Controllers
             bool enableCache = (bool)this.Session["EnableCache"];
 
             // retrieve product catalog from repository and measure the elapsed time
-            Services.IProductRepository productRepository = CloudShop.Services.DataSourceFactory.GetProductsRepository(enableCache);
-                
+            Services.IProductRepository productRepository =
+                CloudShop.Services.DataSourceFactory.GetProductsRepository(enableCache);
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
             var products = productRepository.GetProducts();
@@ -83,11 +83,11 @@ namespace CloudShop.Controllers
 
             return RedirectToAction("Checkout");
         }
-		
+
         public ActionResult EnableCache(bool enabled)
         {
-            this.Session["EnableCache"] = !((bool)this.Session["EnableCache"]);
+            this.Session["EnableCache"] = enabled;
             return RedirectToAction("Index");
         }
-	}
+    }
 }

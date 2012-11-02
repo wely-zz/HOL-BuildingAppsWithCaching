@@ -40,7 +40,7 @@
                 factoryConfig = new DataCacheFactoryConfiguration();
                 cacheFactory = new DataCacheFactory(factoryConfig);
             }
-        }
+        } 
 
         public List<string> GetProducts()
         {

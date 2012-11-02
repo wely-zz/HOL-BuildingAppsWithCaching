@@ -1,17 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "CloudShop.Azure", "CloudShop.Azure\CloudShop.Azure.ccproj", "{7568184F-CB2F-4D0B-848D-62D5058D9635}"
+# Visual Studio Express 2012 for Web
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "CloudShop.Azure", "CloudShop.Azure\CloudShop.Azure.ccproj", "{BDF417DA-6391-425F-8771-C586DA8BA042}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudShop", "CloudShop\CloudShop.csproj", "{07C5610E-4231-4556-9989-9A07FFAA33BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudShop", "CloudShop\CloudShop.csproj", "{AE2595B3-32C5-40AC-B3EA-15D1D76427B6}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{84172C4C-83BE-494F-B1B1-0FA42FE2EF09}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{4148FBAD-3904-4BF6-8778-0E5189FF10D5}"
 	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheWorkerRole", "CacheWorkerRole\CacheWorkerRole.csproj", "{7229AB93-FF8E-47D9-864F-AC3E48811301}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheWorkerRole", "CacheWorkerRole\CacheWorkerRole.csproj", "{5FBD2B33-12C5-4764-BC9D-B020CB354A91}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,18 +20,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{07C5610E-4231-4556-9989-9A07FFAA33BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{07C5610E-4231-4556-9989-9A07FFAA33BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{07C5610E-4231-4556-9989-9A07FFAA33BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{07C5610E-4231-4556-9989-9A07FFAA33BD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7229AB93-FF8E-47D9-864F-AC3E48811301}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7229AB93-FF8E-47D9-864F-AC3E48811301}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7229AB93-FF8E-47D9-864F-AC3E48811301}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7229AB93-FF8E-47D9-864F-AC3E48811301}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7568184F-CB2F-4D0B-848D-62D5058D9635}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7568184F-CB2F-4D0B-848D-62D5058D9635}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7568184F-CB2F-4D0B-848D-62D5058D9635}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7568184F-CB2F-4D0B-848D-62D5058D9635}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDF417DA-6391-425F-8771-C586DA8BA042}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDF417DA-6391-425F-8771-C586DA8BA042}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDF417DA-6391-425F-8771-C586DA8BA042}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDF417DA-6391-425F-8771-C586DA8BA042}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE2595B3-32C5-40AC-B3EA-15D1D76427B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE2595B3-32C5-40AC-B3EA-15D1D76427B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE2595B3-32C5-40AC-B3EA-15D1D76427B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE2595B3-32C5-40AC-B3EA-15D1D76427B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FBD2B33-12C5-4764-BC9D-B020CB354A91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FBD2B33-12C5-4764-BC9D-B020CB354A91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FBD2B33-12C5-4764-BC9D-B020CB354A91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FBD2B33-12C5-4764-BC9D-B020CB354A91}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
