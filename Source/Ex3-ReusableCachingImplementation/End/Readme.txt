@@ -1,2 +1,0 @@
-Replace [YOUR-SQL-DATABASE-SERVER-ADDRESS],[SQL-DATABASE-USERNAME] and [SQL-DATABASE-PASSWORD] placeholders with your Windows Azure SQL Server credentials.
-Refer to "Getting Started: Provisioning the Service" section in the lab's document to find instruction about replacing the [SERVICE-HOST-NAME] and [AUTHORIZATION_INFO] placeholders

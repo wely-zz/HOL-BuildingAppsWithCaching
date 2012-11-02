@@ -24,15 +24,15 @@ During this lab, you will explore how to use these features in a simple Asp.Net 
 
 The following is required to complete this hands-on lab:
 
-- [Microsoft Visual Studio 2012][1]
-- [Windows Azure Tools for Microsoft Visual Studio 1.7][2]
+- [Microsoft Visual Studio 2012 Express for Web][1] or higher
+- [Windows Azure Tools for Microsoft Visual Studio 1.8][2]
 - A Windows Azure subscription - [sign up for a free trial](http://aka.ms/WATK-FreeTrial)
 
-[1]: http://www.microsoft.com/visualstudio/11/en-us
+[1]: http://www.microsoft.com/visualstudio/
 [2]: http://www.windowsazure.com/en-us/develop/downloads/
 [3]: http://aka.ms/WATK-FreeTrial
 
->**Note:** This lab was designed to use Windows 8 Operating System.  This hands-on lab has been designed to use the latest release of the Windows Azure Tools for Visual Studio 2012 (version 1.7).
+>**Note:** This lab was designed for Windows 8.
 
 <a name="Setup" />
 ### Setup ###
@@ -48,7 +48,7 @@ In order to run the exercises in this hands-on lab you need to set up your envir
 
 >Remember to configure the firewall setting your Windows Azure SQL Database account to allow you to specify a list of IP addresses that can access your Windows Azure SQL Database Server. The firewall will deny all connections by default, so **be sure to configure your allow list** so you can connect to the database. Changes to your firewall settings can take a few moments to become effective. For additional information on how to prepare your Windows Azure SQL Database account, refer to the exercise 1 of the Introduction to Windows Azure SQL Database lab in the training kit.
 
->![SQL Azure database setup](images/sql-azure-database-setup.png?raw=true "Windows Azure SQL Database setup")
+>![SQL database setup](Images/sql-database-setup.png?raw=true "Windows Azure SQL Database setup")
 
 >_Windows Azure SQL Database setup_
 
@@ -83,7 +83,7 @@ In this exercise, you will explore the use of the session state provider for Cac
 
 In this task, you will run the Azure Store application in the compute emulator using the default session state provider; you will change that provider to take advantage of the Windows Azure Cache service later on.
 
-1. Start **Microsoft Visual Studio 2012** as administrator.
+1. Start **Microsoft Visual Studio 2012 Express for Web** as administrator.
 1. Open the **Begin** solution located at **Source\\Ex1-CacheSessionState\\Begin**.
 
 	>**Important:** 	Before you execute the solution, make sure that the start-up project is set. For MVC projects, the start page must be left blank.
@@ -102,14 +102,14 @@ In this task, you will run the Azure Store application in the compute emulator u
 
 1. Explore the main page of the application, the **Products** page, which displays a list of products obtained from a Windows Azure SQL Database.
 
-	![Azure Store products page](images/azure-store-products-page.png?raw=true "Azure Store products page")
+	![Azure Store products page](Images/azure-store-products-page.png?raw=true "Azure Store products page")
 
 	_Azure Store products page_
 
 1. Select a product from the list and click **Add item to cart**. You may repeat the process to store additional items in the shopping cart.
 1. Click the **Checkout** link to view the contents of the cart. Verify that the items you selected appear on the list. These items are stored in the current session.
 
-	![Checkout page showing the contents of the shopping cart](images/checkout-page-showing-the-contents-of-the-sho.png?raw=true "Checkout page showing the contents of the shopping cart")
+	![Checkout page showing the contents of the shopping cart](Images/checkout-page-showing-the-contents-of-the-sho.png?raw=true "Checkout page showing the contents of the shopping cart")
 
 	_Checkout page showing the contents of the shopping cart_
 
@@ -117,7 +117,7 @@ In this task, you will run the Azure Store application in the compute emulator u
 1. Click on **Recycle** link. This link forces the web role to be recycled. Once you click on the link, the Products page will turn blank.
 1. In the **Compute Emulator**, observe how the web role is recycled by the emulator:
 
-	![Suspending the service role instance](images/suspending-the-service-role-instance.png?raw=true "Suspending the service role instance")
+	![Suspending the service role instance](Images/suspending-the-service-role-instance.png?raw=true "Suspending the service role instance")
 
 	_Web role recycled_
 
@@ -134,7 +134,7 @@ In this task, you will run the Azure Store application in the compute emulator u
 In this task, you will add a new worker role that serves as a dedicated cache host. All other web roles and worker roles in the Cloud Service will be able to access the Cache service hosted by this role. You can set up multiple such dedicated work roles within your Cloud Service. In addition, you can also enable Cache service on any of the existing roles and allocate certain percentage of virtual machine memory to be used as cache. 
 
 1. In solution explorer, expand **CloudShop.Azure** node, and then right-click on **Roles**. Then, select **Add**->**New Worker Role Project...***.
-2. In **Add New Role Project** dialog, select **Cache Worker Role** template. Name the role as **CacheWorkerRole**, and then click "Add".
+2. In **Add New Role Project** dialog, select **Cache Worker Role** template. Name the role as **CacheWorkerRole**, and then click **Add**.
 
   >**Note:** All Cache hosts in your Cloud Service share their runtime states via a Windows Azure Blog Storage. By default, a cache work role is configured to use development storage. You can change this setting in **Caching** tab on the role property page. 
 
@@ -143,7 +143,7 @@ In this task, you will add a new worker role that serves as a dedicated cache ho
 
 In this task, you will change the Session State provider to take advantage of the Windows Azure Cache as the storage mechanism. This requires adding the appropriate assemblies to the **CloudShop** project and then updating the corresponding configuration in the **Web.config** file. 
 
-1. In Visual Studio 2012, open **Package manager Console** from **Tools**->**Library package Manager**->**Package Manager Console** menu.
+1. In Visual Studio 2012 Express for Web, open **Package manager Console** from **Tools**->**Library package Manager**->**Package Manager Console** menu.
 
 1. Make sure that **CloudShop** is selected in the **Default project** drop-down list. Issue the following command to install the Nuget package for Cache service:  
  
@@ -168,7 +168,7 @@ In this task, you will change the Session State provider to take advantage of th
 
 1. Add a new session state provider configuration under System.Web tag:  
 
-   ````XML
+	````XML
 	<system.Web>
 	...
 	<sessionState mode="Custom" customProvider="NamedCacheBProvider">
@@ -210,7 +210,7 @@ During the exercise, you will update the data access code with a trivial impleme
 To make use of Windows Azure Caching, you first need to create a **DataCacheFactory** object. This object determines the cache cluster connection information, which is set programmatically or by reading settings from the configuration file. Typically, you create an instance of the factory class and use it for the lifetime of the application. To store data in the cache, you request a **DataCache** instance from the **DataCacheFactory** and then use it to add or retrieve items from the cache.
 In this task, you update the data access code to cache the result of queries to Windows Azure SQL Database using the Windows Azure Caching. 
 
-1. Start **Microsoft Visual Studio 2012** as an administrator.
+1. Start **Microsoft Visual Studio 2012 Express for Web** as an administrator.
 1. Open the **Begin** solution located at **Source\\Ex2-CachingData\\Begin**.
 
 	>**Important:** Before you execute the solution, make sure that the start-up project is set. For MVC projects, the start page must be left blank. 
@@ -480,7 +480,7 @@ In this task, you will update the application to allow control of the use of the
 
 	>**Note:** You may need to refresh the page several times to obtain a stable reading. The value shown for the first request may be greater because ASP.NET needs to compile the page.
 
-	![Running the application without the cache](images/running-the-application-without-the-cache.png?raw=true "Running the application without the cache")
+	![Running the application without the cache](Images/running-the-application-without-the-cache.png?raw=true "Running the application without the cache")
 
 	_Running the application without the cache_
 
@@ -490,7 +490,7 @@ In this task, you will update the application to allow control of the use of the
 
 1. Click **Products**, or refresh the page in the browser. This time, the application retrieves the product data from the Windows Azure Caching and the elapsed time should be lower. Confirm that the first item in the list indicates that the source of the information is the cache.
 
-	![Running the application with the cache enabled](images/running-the-application-with-the-cache-enable.png?raw=true "Running the application with the cache enabled")
+	![Running the application with the cache enabled](Images/running-the-application-with-the-cache-enable.png?raw=true "Running the application with the cache enabled")
 
 	_Running the application with the cache enabled_
 
@@ -662,7 +662,7 @@ When using Windows Azure Caching, you have the option of using a local cache tha
 
 1. Refresh the page several times until the elapsed time stabilizes. Notice that the reading is now significantly lower, possibly under a millisecond, showing that the application now retrieves the data from the local in-memory cache. 
 
-	![Using the local cache](images/using-the-local-cache.png?raw=true "Using the local cache")
+	![Using the local cache](Images/using-the-local-cache.png?raw=true "Using the local cache")
 
 	_Using the local cache_
 
@@ -703,7 +703,7 @@ To take advantage of this caching implementation in the Azure Store application,
 
 In this task, you will create the abstract class that you will use as the base class for your caching data source classes. You can take advantage of this general-purpose class in any project that requires a caching layer.
 
-1. Start **Microsoft Visual Studio 2012** as administrator.
+1. Start **Microsoft Visual Studio 2012 Express for Web** as administrator.
 
 1. Open the **Begin** solution located at **Source\\Ex3-ReusableCachingImplementation**.
 
@@ -845,7 +845,7 @@ Once you have created an abstract base class for caching data sources, you will 
 	using System.Collections.Generic;
 	using System.Linq;
 	using System.Web;
-	using CloudShop.Services
+	using CloudShop.Services;
 	using System.Runtime.Caching;
 	...
 	````
@@ -1038,7 +1038,7 @@ In this task, you will update the application to take advantage of the data sour
 
 1. Press **CTRL+F5** to build and test the enhanced caching implementation in the compute emulator.
 
-1. When you start the application, the cache is initially disabled. Click **Yes** in **Use cache for product data** and wait for the page to refresh. Remember that the initial request after you enable the cache includes the overhead required to retrieve the data and insert it into the cache.
+1. When you start the application, the cache is initially disabled. Click **Yes** in **Enable Cache** and wait for the page to refresh. Remember that the initial request after you enable the cache includes the overhead required to retrieve the data and insert it into the cache.
 
 1. Click **Products**, or refresh the page in the browser once again. This time, the application retrieves the product data from the cache and the elapsed time should be lower, most likely under a millisecond given that you have currently configured it to use the in-memory cache provided by the .NET Framework.
 

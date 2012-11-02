@@ -48,6 +48,5 @@ namespace CloudShop.Services.Caching
         {
             this.cacheProvider.Remove(cacheKey, this.regionName);
         }
-
     }
 }
