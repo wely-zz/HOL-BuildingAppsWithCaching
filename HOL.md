@@ -205,7 +205,7 @@ This exercise will show you how to use the Windows Azure Caching to cache result
 During the exercise, you will update the data access code with a trivial implementation of caching. It uses the canonical pattern, in which the code checks the cache first to retrieve the results of a query and, if there is no data available, executes the query against the database to cache the results.
 
 <a name="Ex2Task1" />
-#### Task 1 – Caching Data Retrieved from the SQL Reporting ####
+#### Task 1 – Caching Data Retrieved from the SQL Database ####
 
 To make use of Windows Azure Caching, you first need to create a **DataCacheFactory** object. This object determines the cache cluster connection information, which is set programmatically or by reading settings from the configuration file. Typically, you create an instance of the factory class and use it for the lifetime of the application. To store data in the cache, you request a **DataCache** instance from the **DataCacheFactory** and then use it to add or retrieve items from the cache.
 In this task, you update the data access code to cache the result of queries to Windows Azure SQL Database using the Windows Azure Caching. 
